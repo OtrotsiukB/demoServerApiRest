@@ -1,6 +1,9 @@
-package com.example.demo
+package com.example.demo.data
 
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
 
+@Document(collection = "books")
 data class BookInfo(
     val name:String,
     val urlImage:String,
@@ -14,6 +17,8 @@ data class BookInfo(
     val idInArhive: String,
     val raitingPlus:Int = 0,
     val raitingMinus:Int =0,
-    val viewUser:Int = 0
+    val viewUser:Int = 0,
+    @Id
+    val id:String?=null
 
 )

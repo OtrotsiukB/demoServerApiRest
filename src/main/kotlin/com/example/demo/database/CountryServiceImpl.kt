@@ -1,10 +1,15 @@
-package com.example.demo
+package com.example.demo.database
 
+
+import com.example.demo.data.BookInfo
+import com.example.demo.spring.BookService
 import org.springframework.stereotype.Service
 
 @Service
-class CountryServiceImpl: BookService {
-    override fun getAll(): List<BookInfo> = listOf(BookInfo("Пришествие бога смерти. Том 4",
+class CountryServiceImpl(private val bookRepository: BookRepository): BookService {
+
+ /*   override fun getAll(): List<BookInfo> = listOf(
+        BookInfo("Пришествие бога смерти. Том 4",
         "https://baza-knig.ink/uploads/posts/2023-10/01f8f18c5f11ad0e22c70fb3e58786db1.webp",
         "Дорничев Дмитрий",
         "2023",
@@ -75,5 +80,12 @@ class CountryServiceImpl: BookService {
         )
 
 
-    )
-} 
+    )*/
+ override fun getAll():List<BookInfo>{
+        val allBooks = bookRepository.findAll()
+        return allBooks
+    }
+    override fun addBook(bookInfo: BookInfo){
+        bookRepository.save(bookInfo)
+    }
+}
