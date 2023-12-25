@@ -2,10 +2,7 @@ package com.example.demo.spring
 
 
 import com.example.demo.data.BookInfo
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/book")
@@ -16,6 +13,28 @@ class BookController (
     fun getAll(): List<BookInfo> = bookService.getAll()
    /* @GetMapping
     fun getAll(): List<BookInfo> = {}*/
-    @PostMapping("/add")
-    fun save(bookInfo: BookInfo) = bookService.addBook(bookInfo)
+    @PostMapping("/save")
+    fun save(@RequestBody bookInfo: BookInfo):BookInfo{
+        bookService.save(bookInfo)
+    return bookInfo
+    }
+
+    @GetMapping("/lastN")
+    fun getLastNRecords(@RequestParam(required = true, defaultValue = "10") n: Int): List<BookInfo> {
+        return bookService.getLastNRecords(n)
+    }
+
+    @GetMapping("/range")
+    fun getRecordsInRange(
+        @RequestParam(required = true, defaultValue = "70") startIndex: Int,
+        @RequestParam(required = true, defaultValue = "120") endIndex: Int
+    ): List<BookInfo> {
+        return bookService.getRecordsInRange(startIndex, endIndex)
+    }
+
+    @GetMapping("/allByGenre")
+    fun getAllByGenre(@RequestParam(required = true) genre: String): List<BookInfo> {
+        return bookService.getAllByGenre(genre)
+    }
+
 }

@@ -5,8 +5,10 @@ import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories
 import com.mongodb.client.MongoClient
 import com.mongodb.client.MongoClients
+import org.springframework.data.mongodb.config.EnableMongoAuditing
 
 @Configuration
+@EnableMongoAuditing
 @EnableMongoRepositories(basePackages = ["com.example.demo"])
 class MongoConfig : AbstractMongoClientConfiguration() {
 

@@ -3,6 +3,8 @@ package com.example.demo.database
 
 import com.example.demo.data.BookInfo
 import com.example.demo.spring.BookService
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 
 @Service
@@ -85,7 +87,29 @@ class CountryServiceImpl(private val bookRepository: BookRepository): BookServic
         val allBooks = bookRepository.findAll()
         return allBooks
     }
-    override fun addBook(bookInfo: BookInfo){
+    override fun save(bookInfo: BookInfo):BookInfo{
         bookRepository.save(bookInfo)
+        return bookInfo
     }
+
+    override fun getLastNRecords(n: Int): List<BookInfo> {
+        val pageable = PageRequest.of(0, n, Sort.by(Sort.Direction.DESC, "createdAt"))
+        val lastNRecords = bookRepository.findLastNRecords(pageable)
+        return lastNRecords
+    }
+
+    override fun getRecordsInRange(startIndex: Int, endIndex: Int): List<BookInfo> {
+        val pageSize = endIndex - startIndex + 1
+        val pageNumber = startIndex / pageSize
+        val pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.DESC, "createdAt"))
+        val recordsInRange = bookRepository.findRecordsInRange(pageable)
+        return recordsInRange
+    }
+
+    override fun getAllByGenre(genre: String): List<BookInfo> {
+        return bookRepository.findAllByGenre(genre)
+    }
+
+
+
 }
