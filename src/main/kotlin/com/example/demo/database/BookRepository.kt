@@ -30,5 +30,6 @@ interface BookRepository : MongoRepository<BookInfo, String> {
     @Query("{ 'autor' : ?0 }")
     fun findAllByAutor(autor: String): List<BookInfo>
 
+    fun findByAutorAndCycle(autor: String, cycle: String): List<BookInfo>
 
 }

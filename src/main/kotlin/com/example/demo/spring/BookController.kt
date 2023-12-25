@@ -45,6 +45,13 @@ class BookController (
     fun getBooksByAuthor(@RequestParam(required = true) autor: String): List<BookInfo> {
         return bookService.getAllByAutor(autor)
     }
+    @GetMapping("/byAuthorAndCycle")
+    fun getBooksByAuthorAndCycle(
+        @RequestParam(required = true) autor: String,
+        @RequestParam(required = true) cycle: String
+    ): List<BookInfo> {
+        return bookService.getBooksByAuthorAndCycle(autor, cycle)
+    }
 
 
 }

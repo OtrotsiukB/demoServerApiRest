@@ -121,5 +121,12 @@ class CountryServiceImpl(private val bookRepository: BookRepository): BookServic
     }
 
 
+    override fun getBooksByAuthorAndCycle(autor: String, cycle: String): List<BookInfo> {
+        return bookRepository.findByAutorAndCycle(autor, cycle)
+    }
+
+
+
+
 
 }
