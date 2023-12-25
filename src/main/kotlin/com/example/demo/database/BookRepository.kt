@@ -32,4 +32,7 @@ interface BookRepository : MongoRepository<BookInfo, String> {
 
     fun findByAutorAndCycle(autor: String, cycle: String): List<BookInfo>
 
+    @Query("{'name': { \$regex: ?0, \$options: 'i' }}")
+    fun findByNameContainingIgnoreCase(name: String, pageable: Pageable): List<BookInfo>
+
 }

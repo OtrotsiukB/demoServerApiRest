@@ -125,6 +125,11 @@ class CountryServiceImpl(private val bookRepository: BookRepository): BookServic
         return bookRepository.findByAutorAndCycle(autor, cycle)
     }
 
+    override fun getBooksByNameContaining(name: String): List<BookInfo> {
+        val pageable = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "createdAt"))
+        return bookRepository.findByNameContainingIgnoreCase(name, pageable)
+    }
+
 
 
 

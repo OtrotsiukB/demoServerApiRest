@@ -53,5 +53,9 @@ class BookController (
         return bookService.getBooksByAuthorAndCycle(autor, cycle)
     }
 
+    @GetMapping("/search")
+    fun searchBooksByName(@RequestParam name: String): List<BookInfo> {
+        return bookService.getBooksByNameContaining(name)
+    }
 
 }

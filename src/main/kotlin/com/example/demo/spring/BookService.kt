@@ -18,4 +18,5 @@ interface BookService {
     fun getBooksByAuthorAndCycle(autor: String, cycle: String): List<BookInfo>
 
 
+    fun getBooksByNameContaining(name: String): List<BookInfo>
 }
