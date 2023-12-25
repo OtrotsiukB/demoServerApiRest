@@ -33,8 +33,18 @@ class BookController (
     }
 
     @GetMapping("/allByGenre")
-    fun getAllByGenre(@RequestParam(required = true) genre: String): List<BookInfo> {
-        return bookService.getAllByGenre(genre)
+    fun getAllByGenre(
+        @RequestParam(required = true) genre: String,
+        @RequestParam(required = true, defaultValue = "0") startIndex: Int,
+        @RequestParam(required = true, defaultValue = "9") endIndex: Int
+    ): List<BookInfo> {
+        return bookService.getAllByGenre(genre, startIndex, endIndex)
     }
+
+    @GetMapping("/byAuthor")
+    fun getBooksByAuthor(@RequestParam(required = true) autor: String): List<BookInfo> {
+        return bookService.getAllByAutor(autor)
+    }
+
 
 }

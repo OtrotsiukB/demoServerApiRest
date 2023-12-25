@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.repository.Query
 import org.springframework.stereotype.Repository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Sort
 
 //работа с базой данных
 @Repository
@@ -23,8 +24,11 @@ interface BookRepository : MongoRepository<BookInfo, String> {
     fun findRecordsInRange(pageable: Pageable): List<BookInfo>
     //жанр последние
 
-    fun findAllByGenre(genre: String): List<BookInfo>
+    @Query("{ 'genre' : ?0 }")
+    fun findAllByGenre(genre: String, sort: Sort): List<BookInfo>
 
+    @Query("{ 'autor' : ?0 }")
+    fun findAllByAutor(autor: String): List<BookInfo>
 
 
 }

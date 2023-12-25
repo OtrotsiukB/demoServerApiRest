@@ -106,8 +106,18 @@ class CountryServiceImpl(private val bookRepository: BookRepository): BookServic
         return recordsInRange
     }
 
-    override fun getAllByGenre(genre: String): List<BookInfo> {
-        return bookRepository.findAllByGenre(genre)
+    override fun getAllByGenre(genre: String, startIndex: Int, endIndex: Int): List<BookInfo> {
+        val recordsByGenre = bookRepository.findAllByGenre(genre, Sort.by(Sort.Direction.DESC, "createdAt"))
+        val totalRecords = recordsByGenre.size
+
+        return if (startIndex < totalRecords) {
+            recordsByGenre.subList(startIndex, minOf(endIndex + 1, totalRecords))
+        } else {
+            emptyList()
+        }
+    }
+    override fun getAllByAutor(autor: String): List<BookInfo> {
+        return bookRepository.findAllByAutor(autor)
     }
 
 

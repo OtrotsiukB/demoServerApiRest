@@ -11,8 +11,9 @@ interface BookService {
     fun getLastNRecords(n: Int): List<BookInfo>
     fun getRecordsInRange(startIndex: Int, endIndex: Int): List<BookInfo>
 
-    fun getAllByGenre(genre: String): List<BookInfo>
+    fun getAllByGenre(genre: String, startIndex: Int, endIndex: Int): List<BookInfo>
 
+    fun getAllByAutor(autor: String): List<BookInfo>
 
 
 
