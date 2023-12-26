@@ -19,4 +19,10 @@ interface BookService {
 
 
     fun getBooksByNameContaining(name: String): List<BookInfo>
+
+    fun incrementViewCount(bookId: String): BookInfo?
+
+
+    fun incrementRaitingPlus(bookId: String): BookInfo?
+    fun incrementRaitingMinus(bookId: String): BookInfo?
 }

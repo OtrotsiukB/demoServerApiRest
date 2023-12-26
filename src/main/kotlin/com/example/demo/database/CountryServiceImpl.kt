@@ -130,8 +130,31 @@ class CountryServiceImpl(private val bookRepository: BookRepository): BookServic
         return bookRepository.findByNameContainingIgnoreCase(name, pageable)
     }
 
+    override fun incrementViewCount(bookId: String): BookInfo? {
+        val book = bookRepository.findById(bookId).orElse(null)
+        if (book != null) {
+            book.viewUser += 1
+            bookRepository.save(book)
+        }
+        return book
+    }
 
+    override fun incrementRaitingPlus(bookId: String): BookInfo? {
+        val book = bookRepository.findById(bookId).orElse(null)
+        if (book != null) {
+            book.raitingPlus += 1
+            bookRepository.save(book)
+        }
+        return book
+    }
 
-
+    override fun incrementRaitingMinus(bookId: String): BookInfo? {
+        val book = bookRepository.findById(bookId).orElse(null)
+        if (book != null) {
+            book.raitingMinus += 1
+            bookRepository.save(book)
+        }
+        return book
+    }
 
 }

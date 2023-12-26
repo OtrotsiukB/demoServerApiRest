@@ -35,4 +35,12 @@ interface BookRepository : MongoRepository<BookInfo, String> {
     @Query("{'name': { \$regex: ?0, \$options: 'i' }}")
     fun findByNameContainingIgnoreCase(name: String, pageable: Pageable): List<BookInfo>
 
+    @Query("{'id': ?0}")
+    fun incrementViewCountById(bookId: String)
+
+    @Query("{'_id': ?0}")
+    fun incrementRaitingPlus(bookId: String)
+
+    @Query("{'_id': ?0}")
+    fun incrementRaitingMinus(bookId: String)
 }

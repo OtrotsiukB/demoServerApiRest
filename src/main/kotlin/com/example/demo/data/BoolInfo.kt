@@ -18,9 +18,9 @@ data class BookInfo(
     val numberCycle:String="",
     val genre: List<String>,
     val idInArhive: String,
-    val raitingPlus:Int = 0,
-    val raitingMinus:Int =0,
-    val viewUser:Int = 0,
+    var raitingPlus:Int = 0,
+    var raitingMinus:Int =0,
+    var viewUser:Int = 0,
     @CreatedDate
     val createdAt: LocalDateTime? = null,
     @Id

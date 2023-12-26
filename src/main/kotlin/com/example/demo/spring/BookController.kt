@@ -58,4 +58,18 @@ class BookController (
         return bookService.getBooksByNameContaining(name)
     }
 
+    @GetMapping("/incrementViewCount")
+    fun incrementViewCount(@RequestParam(required = true) bookId: String): BookInfo? {
+        return bookService.incrementViewCount(bookId)
+    }
+
+    @GetMapping("/incrementRaitingPlus")
+    fun incrementRaitingPlus(@RequestParam(required = true) bookId: String): BookInfo? {
+        return bookService.incrementRaitingPlus(bookId)
+    }
+
+    @GetMapping("/incrementRaitingMinus")
+    fun incrementRaitingMinus(@RequestParam(required = true) bookId: String): BookInfo? {
+        return bookService.incrementRaitingMinus(bookId)
+    }
 }
